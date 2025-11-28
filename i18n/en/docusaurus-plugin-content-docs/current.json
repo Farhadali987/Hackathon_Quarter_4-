@@ -1,0 +1,66 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.textbookSidebar.category.Module 1: Foundations": {
+    "message": "Module 1: Foundations",
+    "description": "The label for category 'Module 1: Foundations' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 1: Foundations.link.generated-index.title": {
+    "message": "Module 1: Foundations",
+    "description": "The generated-index page title for category 'Module 1: Foundations' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 1: Foundations.link.generated-index.description": {
+    "message": "Understand the core principles of Physical AI and the Robotic Operating System.",
+    "description": "The generated-index page description for category 'Module 1: Foundations' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 2: Simulation & Digital Twins": {
+    "message": "Module 2: Simulation & Digital Twins",
+    "description": "The label for category 'Module 2: Simulation & Digital Twins' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 2: Simulation & Digital Twins.link.generated-index.title": {
+    "message": "Module 2: Simulation & Digital Twins",
+    "description": "The generated-index page title for category 'Module 2: Simulation & Digital Twins' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 2: Simulation & Digital Twins.link.generated-index.description": {
+    "message": "Explore the creation and use of digital twins for robot development and testing.",
+    "description": "The generated-index page description for category 'Module 2: Simulation & Digital Twins' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 3: Advanced AI & Perception": {
+    "message": "Module 3: Advanced AI & Perception",
+    "description": "The label for category 'Module 3: Advanced AI & Perception' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 3: Advanced AI & Perception.link.generated-index.title": {
+    "message": "Module 3: Advanced AI & Perception",
+    "description": "The generated-index page title for category 'Module 3: Advanced AI & Perception' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 3: Advanced AI & Perception.link.generated-index.description": {
+    "message": "Dive into advanced AI concepts and hardware acceleration for robot perception.",
+    "description": "The generated-index page description for category 'Module 3: Advanced AI & Perception' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 4: Interaction & Autonomy": {
+    "message": "Module 4: Interaction & Autonomy",
+    "description": "The label for category 'Module 4: Interaction & Autonomy' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 4: Interaction & Autonomy.link.generated-index.title": {
+    "message": "Module 4: Interaction & Autonomy",
+    "description": "The generated-index page title for category 'Module 4: Interaction & Autonomy' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Module 4: Interaction & Autonomy.link.generated-index.description": {
+    "message": "Learn about Vision-Language-Action models, humanoid movement, and conversational capabilities.",
+    "description": "The generated-index page description for category 'Module 4: Interaction & Autonomy' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Capstone & Resources": {
+    "message": "Capstone & Resources",
+    "description": "The label for category 'Capstone & Resources' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Capstone & Resources.link.generated-index.title": {
+    "message": "Capstone Project & Resources",
+    "description": "The generated-index page title for category 'Capstone & Resources' in sidebar 'textbookSidebar'"
+  },
+  "sidebar.textbookSidebar.category.Capstone & Resources.link.generated-index.description": {
+    "message": "Prepare for the final project and understand the necessary hardware and infrastructure.",
+    "description": "The generated-index page description for category 'Capstone & Resources' in sidebar 'textbookSidebar'"
+  }
+}
