@@ -1,32 +1,14 @@
-from datetime import datetime
+from pydantic import BaseModel
 from typing import Optional, List
-from pydantic import BaseModel, Field
+from datetime import datetime
+import uuid
 
-
-class RAGChatbotBase(BaseModel):
-    sessionId: str
-    userId: Optional[str] = None
-    inputQuery: str = Field(..., min_length=1, max_length=1000)
-    response: str = Field(..., min_length=1, max_length=5000)
-    sourceChunks: List[str] = []
-
-
-class RAGChatbotCreate(RAGChatbotBase):
-    pass
-
-
-class RAGChatbotUpdate(BaseModel):
-    response: Optional[str] = Field(None, min_length=1, max_length=5000)
-    sourceChunks: Optional[List[str]] = None
-    feedback: Optional[int] = Field(None, ge=1, le=5)
-    feedbackComment: Optional[str] = None
-
-
-class RAGChatbot(RAGChatbotBase):
-    id: str
-    createdAt: datetime
-    feedback: Optional[int] = None  # User feedback rating (1-5) or thumbs up/down
-    feedbackComment: Optional[str] = None
-
-    class Config:
-        from_attributes = True
+class RAGChatbot(BaseModel):
+    id: str = str(uuid.uuid4())
+    session_id: str = str(uuid.uuid4())
+    user_id: Optional[str] = None
+    query: str
+    response: str
+    source_documents: List[str] = []
+    created_at: datetime = datetime.now()
+    is_fallback: bool = False

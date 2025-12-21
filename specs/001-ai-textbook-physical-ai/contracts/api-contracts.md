@@ -1,26 +1,33 @@
 # API Contracts: AI Textbook for Physical AI & Humanoid Robotics
 
-## Chatbot API
+## Chatbot Service API
 
 ### POST /api/chatbot/query
-**Description**: Submit a query to the RAG chatbot and receive a response based on textbook content
+**Purpose**: Submit a query to the RAG chatbot and receive a response based on textbook content
 
 **Request**:
 ```json
 {
-  "query": "string (required): The user's question/query",
-  "sessionId": "string (optional): Session identifier for conversation tracking",
-  "userId": "string (optional): User identifier if authenticated"
+  "query": "string (required, user's question)",
+  "session_id": "string (optional, for conversation tracking)",
+  "user_id": "string (optional, user identifier)",
+  "language": "string (optional, default: 'en')"
 }
 ```
 
-**Response** (200 OK):
+**Response (200 OK)**:
 ```json
 {
-  "response": "string: The AI-generated response based on textbook content",
-  "sessionId": "string: Session identifier for conversation tracking",
-  "sourceChunks": "array of strings: IDs of content chunks used to generate response",
-  "timestamp": "string: ISO 8601 timestamp of the response"
+  "response": "string (chatbot's answer)",
+  "session_id": "string (conversation identifier)",
+  "source_documents": [
+    {
+      "id": "string (textbook content ID)",
+      "title": "string (content title)",
+      "url": "string (content URL)"
+    }
+  ],
+  "is_fallback": "boolean (true if couldn't answer from indexed content)"
 }
 ```
 
@@ -29,180 +36,304 @@
 - 429: Rate limit exceeded
 - 500: Internal server error
 
----
+### GET /api/chatbot/history/{session_id}
+**Purpose**: Retrieve conversation history for a specific session
+
+**Response (200 OK)**:
+```json
+{
+  "session_id": "string",
+  "history": [
+    {
+      "query": "string",
+      "response": "string",
+      "timestamp": "datetime",
+      "source_documents": ["array of document IDs"]
+    }
+  ]
+}
+```
 
 ## Textbook Content API
 
 ### GET /api/textbook/content
-**Description**: Retrieve textbook content by various filters
+**Purpose**: Retrieve available textbook content with filtering options
 
 **Query Parameters**:
 - `topic` (optional): Filter by topic (e.g., "ROS 2", "Gazebo")
-- `level` (optional): Filter by difficulty level ("beginner", "intermediate", "advanced")
-- `language` (optional): Filter by language ("en", "ur")
-- `contentType` (optional): Filter by content type ("chapter", "section", "lesson")
-- `parentId` (optional): Get content that is a child of the specified parent
+- `language` (optional): Filter by language (default: "en")
+- `limit` (optional): Number of results (default: 20, max: 100)
+- `offset` (optional): Offset for pagination (default: 0)
 
-**Response** (200 OK):
+**Response (200 OK)**:
 ```json
 {
-  "content": [
+  "items": [
     {
-      "id": "string: Unique identifier for the content piece",
-      "title": "string: Title of the content piece",
-      "content": "string: The actual educational content in markdown format",
-      "contentType": "string: Type of content",
-      "topic": "string: The topic covered",
-      "level": "string: Difficulty level",
-      "language": "string: Language code",
-      "parentId": "string: ID of parent content",
-      "order": "integer: Order of this content within its parent"
+      "id": "string",
+      "title": "string",
+      "slug": "string",
+      "topic": "string",
+      "chapter_number": "integer",
+      "language": "string",
+      "created_at": "datetime",
+      "updated_at": "datetime"
+    }
+  ],
+  "total": "integer",
+  "limit": "integer",
+  "offset": "integer"
+}
+```
+
+### GET /api/textbook/content/{slug}
+**Purpose**: Retrieve specific textbook content by slug
+
+**Response (200 OK)**:
+```json
+{
+  "id": "string",
+  "title": "string",
+  "slug": "string",
+  "content": "string (markdown content)",
+  "topic": "string",
+  "chapter_number": "integer",
+  "language": "string",
+  "version": "integer",
+  "created_at": "datetime",
+  "updated_at": "datetime"
+}
+```
+
+### GET /api/textbook/content/{slug}/related
+**Purpose**: Retrieve content related to the specified content
+
+**Response (200 OK)**:
+```json
+{
+  "items": [
+    {
+      "id": "string",
+      "title": "string",
+      "slug": "string",
+      "topic": "string",
+      "relevance_score": "number"
     }
   ]
 }
 ```
-
-### GET /api/textbook/content/{id}
-**Description**: Retrieve specific textbook content by ID
-
-**Response** (200 OK):
-```json
-{
-  "id": "string: Unique identifier for the content piece",
-  "title": "string: Title of the content piece",
-  "content": "string: The actual educational content in markdown format",
-  "contentType": "string: Type of content",
-  "topic": "string: The topic covered",
-  "level": "string: Difficulty level",
-  "language": "string: Language code",
-  "parentId": "string: ID of parent content",
-  "order": "integer: Order of this content within its parent",
-  "createdAt": "string: ISO 8601 timestamp",
-  "updatedAt": "string: ISO 8601 timestamp"
-}
-```
-
-**Error Responses**:
-- 404: Content not found
-- 500: Internal server error
-
----
-
-## User Profile API
-
-### GET /api/user/profile
-**Description**: Retrieve current user's profile information
-
-**Response** (200 OK):
-```json
-{
-  "id": "string: Unique user identifier",
-  "email": "string: User's email address",
-  "name": "string: User's full name",
-  "preferredLanguage": "string: Preferred language code",
-  "learningLevel": "string: Current learning level",
-  "personalizationSettings": "json: User's personalization preferences",
-  "createdAt": "string: ISO 8601 timestamp",
-  "lastActiveAt": "string: ISO 8601 timestamp",
-  "progress": "json: Learning progress tracking"
-}
-```
-
-### PUT /api/user/profile
-**Description**: Update user's profile information
-
-**Request**:
-```json
-{
-  "name": "string (optional): User's full name",
-  "preferredLanguage": "string (optional): Preferred language code",
-  "learningLevel": "string (optional): Current learning level",
-  "personalizationSettings": "json (optional): User's personalization preferences"
-}
-```
-
-**Response** (200 OK):
-```json
-{
-  "id": "string: Unique user identifier",
-  "email": "string: User's email address",
-  "name": "string: User's full name",
-  "preferredLanguage": "string: Preferred language code",
-  "learningLevel": "string: Current learning level",
-  "personalizationSettings": "json: User's personalization preferences",
-  "createdAt": "string: ISO 8601 timestamp",
-  "lastActiveAt": "string: ISO 8601 timestamp",
-  "progress": "json: Learning progress tracking"
-}
-```
-
----
 
 ## Lab Guidance API
 
 ### GET /api/labs
-**Description**: Retrieve lab guidance by various filters
+**Purpose**: Retrieve available lab guidance with filtering options
 
 **Query Parameters**:
-- `type` (optional): Filter by lab type ("hardware", "cloud", "simulation")
-- `difficulty` (optional): Filter by difficulty level ("beginner", "intermediate", "advanced")
-- `topic` (optional): Filter by related topic
+- `lab_type` (optional): "cloud" or "hardware"
+- `difficulty_level` (optional): "beginner", "intermediate", "advanced"
+- `topic` (optional): Related textbook topic
+- `limit` (optional): Number of results (default: 20, max: 100)
+- `offset` (optional): Offset for pagination (default: 0)
 
-**Response** (200 OK):
+**Response (200 OK)**:
 ```json
 {
-  "labs": [
+  "items": [
     {
-      "id": "string: Unique identifier for the lab guidance",
-      "title": "string: Title of the lab exercise",
-      "description": "string: Detailed description of the lab",
-      "type": "string: Type of lab",
-      "difficulty": "string: Difficulty level",
-      "duration": "integer: Estimated completion time in minutes",
-      "instructions": "string: Step-by-step instructions",
-      "requirements": "array of strings: Equipment/software requirements",
-      "learningObjectives": "array of strings: What the user will learn"
+      "id": "string",
+      "title": "string",
+      "slug": "string",
+      "lab_type": "string",
+      "difficulty_level": "string",
+      "estimated_duration": "integer",
+      "related_topics": ["array of strings"],
+      "created_at": "datetime",
+      "updated_at": "datetime"
     }
-  ]
+  ],
+  "total": "integer",
+  "limit": "integer",
+  "offset": "integer"
 }
 ```
 
-### GET /api/labs/{id}
-**Description**: Retrieve specific lab guidance by ID
+### GET /api/labs/{slug}
+**Purpose**: Retrieve specific lab guidance by slug
 
-**Response** (200 OK):
+**Response (200 OK)**:
 ```json
 {
-  "id": "string: Unique identifier for the lab guidance",
-  "title": "string: Title of the lab exercise",
-  "description": "string: Detailed description of the lab",
-  "type": "string: Type of lab",
-  "difficulty": "string: Difficulty level",
-  "duration": "integer: Estimated completion time in minutes",
-  "instructions": "string: Step-by-step instructions",
-  "requirements": "array of strings: Equipment/software requirements",
-  "learningObjectives": "array of strings: What the user will learn",
-  "createdAt": "string: ISO 8601 timestamp",
-  "updatedAt": "string: ISO 8601 timestamp"
+  "id": "string",
+  "title": "string",
+  "slug": "string",
+  "content": "string (markdown content)",
+  "lab_type": "string",
+  "difficulty_level": "string",
+  "estimated_duration": "integer",
+  "prerequisites": ["array of strings"],
+  "related_topics": ["array of strings"],
+  "created_at": "datetime",
+  "updated_at": "datetime"
 }
 ```
-
----
 
 ## Translation API
 
-### GET /api/translation/available
-**Description**: Retrieve list of available languages for translation
+### GET /api/translation/{content_type}/{content_id}
+**Purpose**: Retrieve translation for specific content
 
-**Response** (200 OK):
+**Path Parameters**:
+- `content_type`: "textbook" or "lab"
+- `content_id`: ID of the content to translate
+
+**Query Parameters**:
+- `target_language`: Required, target language code (e.g., "ur")
+
+**Response (200 OK)**:
 ```json
 {
-  "languages": [
+  "content_id": "string",
+  "content_type": "string",
+  "target_language": "string",
+  "translated_content": "string (translated content)",
+  "status": "string (translation status)",
+  "created_at": "datetime",
+  "updated_at": "datetime"
+}
+```
+
+### POST /api/translation/suggest
+**Purpose**: Submit a translation suggestion
+
+**Request**:
+```json
+{
+  "content_id": "string (ID of source content)",
+  "content_type": "string (textbook/lab)",
+  "target_language": "string (e.g., ur)",
+  "suggested_translation": "string (suggested translation content)",
+  "submitter_notes": "string (optional, additional context)"
+}
+```
+
+**Response (201 Created)**:
+```json
+{
+  "id": "string (translation suggestion ID)",
+  "status": "string (pending)",
+  "created_at": "datetime"
+}
+```
+
+## User Profile API
+
+### GET /api/user/profile
+**Purpose**: Retrieve user profile information
+
+**Response (200 OK)**:
+```json
+{
+  "id": "string",
+  "username": "string",
+  "email": "string",
+  "preferred_language": "string",
+  "personalization_settings": "object",
+  "created_at": "datetime",
+  "updated_at": "datetime"
+}
+```
+
+### PUT /api/user/profile
+**Purpose**: Update user profile information
+
+**Request**:
+```json
+{
+  "username": "string (optional)",
+  "preferred_language": "string (optional)",
+  "personalization_settings": "object (optional)"
+}
+```
+
+**Response (200 OK)**:
+```json
+{
+  "id": "string",
+  "username": "string",
+  "email": "string",
+  "preferred_language": "string",
+  "personalization_settings": "object",
+  "updated_at": "datetime"
+}
+```
+
+### GET /api/user/progress
+**Purpose**: Retrieve user's learning progress
+
+**Response (200 OK)**:
+```json
+{
+  "learning_progress": "object (user's progress tracking)",
+  "completed_content": [
     {
-      "code": "string: Language code (e.g., 'en', 'ur')",
-      "name": "string: Full language name (e.g., 'English', 'Urdu')",
-      "isSupported": "boolean: Whether translation is fully supported for this language"
+      "content_id": "string",
+      "title": "string",
+      "completed_at": "datetime"
     }
-  ]
+  ],
+  "current_learning_path": "array of content IDs"
+}
+```
+
+## Authentication API
+
+### POST /api/auth/login
+**Purpose**: Authenticate user and return session token
+
+**Request**:
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+**Response (200 OK)**:
+```json
+{
+  "user_id": "string",
+  "token": "string",
+  "expires_at": "datetime"
+}
+```
+
+### POST /api/auth/register
+**Purpose**: Register a new user
+
+**Request**:
+```json
+{
+  "username": "string",
+  "email": "string",
+  "password": "string"
+}
+```
+
+**Response (201 Created)**:
+```json
+{
+  "user_id": "string",
+  "token": "string",
+  "expires_at": "datetime"
+}
+```
+
+### POST /api/auth/logout
+**Purpose**: End user session
+
+**Response (200 OK)**:
+```json
+{
+  "message": "Successfully logged out"
 }
 ```

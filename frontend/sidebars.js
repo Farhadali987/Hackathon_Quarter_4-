@@ -2,55 +2,55 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  tutorialSidebar: [
-    'intro',
+  textbookSidebar: [
     {
       type: 'category',
-      label: 'Getting Started',
-      items: ['textbook/chapter1-introduction'],
+      label: 'Textbook',
+      items: [
+        'textbook/chapter1-introduction',
+        'textbook/chapter2-ros2',
+        'textbook/chapter3-gazebo',
+        'textbook/chapter3-digital-twin',
+        'textbook/chapter4-nvidia-isaac',
+        'textbook/chapter5-vla',
+        'textbook/chapter6-humanoid-development',
+        'textbook/chapter7-conversational-robotics',
+        'textbook/chapter8-capstone-hardware',
+      ],
+      link: {
+        type: 'generated-index',
+        title: 'Textbook Chapters',
+        description: 'Learn about Physical AI and Humanoid Robotics',
+        slug: '/textbook',
+      },
     },
-    {
-      type: 'category',
-      label: 'ROS 2',
-      items: ['textbook/chapter2-ros2'],
-    },
-    {
-      type: 'category',
-      label: 'Digital Twin',
-      items: ['textbook/chapter3-digital-twin'],
-    },
-    {
-      type: 'category',
-      label: 'NVIDIA Isaac',
-      items: ['textbook/chapter4-nvidia-isaac'],
-    },
-    {
-      type: 'category',
-      label: 'VLA',
-      items: ['textbook/chapter5-vla'],
-    },
-    {
-      type: 'category',
-      label: 'Humanoid Development',
-      items: ['textbook/chapter6-humanoid-development'],
-    },
-    {
-      type: 'category',
-      label: 'Conversational Robotics',
-      items: ['textbook/chapter7-conversational-robotics'],
-    },
-    {
-      type: 'category',
-      label: 'Capstone Hardware Project',
-      items: ['textbook/chapter8-capstone-hardware'],
-    },
+  ],
+  labGuidesSidebar: [
     {
       type: 'category',
       label: 'Lab Guides',
       items: [
-        'lab-guides/hardware/lab1-getting-started',
-        'lab-guides/cloud/lab1-simulation-basics'
+        {
+          type: 'category',
+          label: 'Cloud Labs',
+          items: [
+            'lab-guides/cloud/lab1-simulation-basics',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Hardware Labs',
+          items: [
+            'lab-guides/hardware/lab1-getting-started',
+          ],
+        },
       ],
+      link: {
+        type: 'generated-index',
+        title: 'Lab Guides',
+        description: 'Practical exercises for Physical AI and Robotics',
+        slug: '/labs',
+      },
     },
   ],
 };

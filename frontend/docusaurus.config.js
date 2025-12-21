@@ -1,21 +1,22 @@
-// @ts-check
-// `@type` JSDoc annotations allow TypeScript to type-check this file without emitting JS
+import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
-/** @type {import('@docusaurus/types').Config} */
-const config = {
+const config: Config = {
   title: 'AI Textbook for Physical AI & Humanoid Robotics',
-  tagline: 'An AI-native textbook for learning Physical AI and Humanoid Robotics',
+  tagline: 'An interactive, AI-native textbook for learning Physical AI and Humanoid Robotics concepts',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-organization.github.io',
+  url: 'https://your-deployment-url.com',
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<organization-name>/'
+  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
-  organizationName: 'your-organization', // Usually your GitHub org/user name.
-  projectName: 'ai-textbook-physical-ai-humanoid-robotics', // Usually your repo name.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'Panaversity', // Usually your GitHub org/user name.
+  projectName: 'ai-textbook-physical-ai', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -31,103 +32,99 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/panaversity/ai-textbook-physical-ai/tree/main/',
         },
         blog: false, // Disable blog if not needed
         theme: {
           customCss: './src/css/custom.css',
         },
-      }),
+      } satisfies Preset.Options,
     ],
   ],
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
-      navbar: {
-        title: 'Physical AI & Robotics',
-        logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+  themeConfig: {
+    // Replace with your project's social card
+    image: 'img/docusaurus-social-card.jpg',
+    navbar: {
+      title: 'AI Textbook: Physical AI & Robotics',
+      logo: {
+        alt: 'AI Textbook Logo',
+        src: 'img/logo.svg',
+      },
+      items: [
+        {
+          type: 'docSidebar',
+          sidebarId: 'textbookSidebar',
+          position: 'left',
+          label: 'Textbook',
         },
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Textbook',
-          },
-          { to: '/blog', label: 'Blog', position: 'left' },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/your-username/your-repo',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-      },
-      prism: {
-        theme: require('prism-react-renderer').themes.github,
-        darkTheme: require('prism-react-renderer').themes.dracula,
-      },
-    }),
+        {
+          type: 'docSidebar',
+          sidebarId: 'labGuidesSidebar',
+          position: 'left',
+          label: 'Lab Guides',
+        },
+        { to: '/chat', label: 'AI Chatbot', position: 'right' },
+        { to: '/auth', label: 'Login', position: 'right' },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/panaversity/ai-textbook-physical-ai',
+          label: 'GitHub',
+          position: 'right',
+        },
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: 'Textbook',
+          items: [
+            {
+              label: 'Introduction',
+              to: '/docs/textbook/intro',
+            },
+          ],
+        },
+        {
+          title: 'Community',
+          items: [
+            {
+              label: 'Panaversity',
+              href: 'https://www.panaversity.org/',
+            },
+            {
+              label: 'Discord',
+              href: 'https://discordapp.com/invite/docusaurus',
+            },
+          ],
+        },
+        {
+          title: 'More',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/panaversity/ai-textbook-physical-ai',
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Panaversity Hackathon I. Built with Docusaurus.`,
+    },
+    prism: {
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+  } satisfies Preset.ThemeConfig,
 };
 
-module.exports = config;
+export default config;
