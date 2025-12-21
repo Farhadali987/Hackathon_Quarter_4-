@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    "@docusaurus/plugin-content-docs",
+    "@docusaurus/plugin-content-blog",
+    "@docusaurus/plugin-sitemap"
+  ],
+  "themes": [
+    "@docusaurus/theme-classic"
+  ],
+  "customFields": {
+    "deployment": {
+      "platform": "github-pages",
+      "organizationName": "your-organization",
+      "projectName": "ai-textbook-physical-ai-humanoid-robotics",
+      "useDocusaurusClassiceDocs": true,
+      "trailingSlash": "always",
+      "onBrokenLinks": "throw",
+      "onBrokenMarkdownLinks": "warn"
+    }
+  }
+}

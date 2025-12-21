@@ -1,0 +1,172 @@
+.textbookContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: white;
+  min-height: 500px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.contentHeader {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  color: #212529;
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+}
+
+.metadata {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.topic, .level, .language {
+  background-color: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.contentBody {
+  flex: 1;
+  margin-bottom: 1.5rem;
+}
+
+.textContent {
+  line-height: 1.6;
+  color: #495057;
+}
+
+.textContent p {
+  margin-bottom: 1rem;
+}
+
+.contentFooter {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.contentInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.placeholder {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6c757d;
+}
+
+.loadingSpinner {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 2rem;
+  color: #dc3545;
+}
+
+.retryButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.retryButton:hover {
+  background-color: #3a56d4;
+}
+
+/* Textbook List Styles */
+.textbookListContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.listTitle {
+  color: #212529;
+  margin-bottom: 1.5rem;
+}
+
+.contentsList {
+  list-style: none;
+  padding: 0;
+}
+
+.contentItem {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contentItem:hover {
+  border-color: #4361ee;
+  box-shadow: 0 2px 4px rgba(67, 97, 238, 0.2);
+  transform: translateY(-2px);
+}
+
+.contentTitle {
+  margin: 0 0 0.5rem 0;
+  color: #212529;
+  font-size: 1.25rem;
+}
+
+.contentMeta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.contentPreview {
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.noContents {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .textbookContainer {
+    padding: 0.5rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .metadata {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .contentInfo {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}

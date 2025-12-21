@@ -1,0 +1,197 @@
+.personalizationContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.personalizationHeader {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.personalizationHeader h1 {
+  margin: 0 0 0.5rem 0;
+  color: #212529;
+  font-size: 1.75rem;
+}
+
+.personalizationHeader p {
+  margin: 0;
+  color: #6c757d;
+}
+
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.settingSection {
+  padding: 1.5rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.settingSection h2 {
+  margin: 0 0 1rem 0;
+  color: #495057;
+  font-size: 1.25rem;
+}
+
+.sectionDescription {
+  margin: 0 0 1rem 0;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+.selectField {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.selectField:focus {
+  outline: none;
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.25);
+}
+
+.helpText {
+  margin: 0.5rem 0 0 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.topicsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.topicButton {
+  padding: 0.75rem;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.topicButton:hover {
+  border-color: #4361ee;
+  background-color: #f0f4ff;
+}
+
+.topicButton.selected {
+  border-color: #4361ee;
+  background-color: #4361ee;
+  color: white;
+}
+
+.accessibilityOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.checkboxGroup {
+  margin-bottom: 1rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.notificationOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.saveButton {
+  padding: 0.75rem 2rem;
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #3a56d4;
+}
+
+.successMessage {
+  padding: 0.75rem;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.loadingSpinner {
+  text-align: center;
+  padding: 3rem;
+  color: #6c757d;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .personalizationContainer {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+  
+  .topicsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .formActions {
+    justify-content: center;
+  }
+}
